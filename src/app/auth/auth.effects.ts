@@ -8,41 +8,41 @@ import { Router } from "@angular/router";
 @Injectable()
 export class AuthEffects {
 
-        //trata o erro e faz o subscribe
-        login$ = createEffect(() =>
-        this.actions$.pipe(
-           ofType(AuthActions.login),
-           tap( action => localStorage.setItem('user', JSON.stringify(action.user)))
-       ),
-       {dispatch: false}
-       );
+  //trata o erro e faz o subscribe
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+        ofType(AuthActions.login),
+        tap( action => localStorage.setItem('user', JSON.stringify(action.user)))
+    ),
+    {dispatch: false}
+  );
 
-       logout$ = createEffect(() =>
-       this.actions$.pipe(
-          ofType(AuthActions.logout),
-          tap( action => {
-            localStorage.removeItem('user');
-            this.router.navigate(['login']);
-          })
-      ),
-      {dispatch: false}
-      );
+  logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.logout),
+      tap( action => {
+        localStorage.removeItem('user');
+        this.router.navigate(['login']);
+      })
+    ),
+    {dispatch: false}
+  );
 
-    constructor(private actions$: Actions,
-        private router: Router) {
-        //  this.actions$.pipe(
-        //     ofType(AuthActions.login),
-        //     tap( action => {
-        //         localStorage.setItem('user', JSON.stringify(action.user));
-        //     })
-        // );
-        // login$.subscribe();
+  constructor(private actions$: Actions,
+      private router: Router) {
+      //  this.actions$.pipe(
+      //     ofType(AuthActions.login),
+      //     tap( action => {
+      //         localStorage.setItem('user', JSON.stringify(action.user));
+      //     })
+      // );
+      // login$.subscribe();
 
-        // actions$.subscribe( action =>{
+      // actions$.subscribe( action =>{
 
-        //     if(action.type === '[Login Page] User Login') {
-        //         localStorage.setItem('user', JSON.stringify(action['user']));
-        //     }
-        // });
-    }
+      //     if(action.type === '[Login Page] User Login') {
+      //         localStorage.setItem('user', JSON.stringify(action['user']));
+      //     }
+      // });
+  }
 }

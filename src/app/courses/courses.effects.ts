@@ -14,8 +14,23 @@ export class CoursesEffects {
             concatMap(action => 
                 this.courses.findAllCourses()),
             map(courses => allCoursesLoaded({courses}))
+            //dispatch the allCoursesLoaded effect
             )
     );
+
+    saveCourse$ = createEffect(
+        () => this.actions$.pipe(
+            ofType(CourseActions.courseUpdated),
+            concatMap(action =>
+                this.courses.saveCourse(
+                    action.update.id,
+                    action.update.changes
+                )
+            )
+        ),
+        {dispatch: false}
+        //não faz nada apos a ação
+    )
 
     constructor(private actions$: Actions,
         private courses: CoursesHttpService){}
